@@ -76,8 +76,14 @@ exports.initialize = function () {
     $(".request-desktop-notifications").on("click", function (e) {
         e.preventDefault();
         $(this).closest(".alert").hide();
-        $("#notifications-area").find("audio")[0].play();
+        const sample_notification = {
+            avatar_url: "https://secure.gravatar.com/avatar/818c212b9f8830dfef491b3f7da99a14?d=identicon&version=1",
+            content: 'Notifications have been turned on.',
+            sender_full_name: 'Zulip'
+        };
         notifications.request_desktop_notifications_permission();
+        notifications.process_notification({message: sample_notification, desktop_notify: true});
+        $("#notifications-area").find("audio")[0].play();
         resize_app();
     });
 
